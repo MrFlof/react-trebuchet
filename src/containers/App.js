@@ -3,6 +3,7 @@
 import React, {PropTypes} from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 import FuelSavingsApp from '../components/FuelSavingsApp';
 import * as FuelSavingsActions from '../actions/fuelSavingsActions';
 
@@ -11,7 +12,12 @@ class App extends React.Component {
     const { fuelSavingsAppState, actions } = this.props;
 
     return (
+      <div>
         <FuelSavingsApp fuelSavingsAppState={fuelSavingsAppState} actions={actions} />
+        <hr />
+        <Link to="/">Root</Link> - <Link to="/foo">Foo</Link> - <Link to="/bar">Bar</Link> - <Link to="/planetpluto">Planet Pluto</Link>
+        {this.props.children}
+      </div>
     );
   }
 }
