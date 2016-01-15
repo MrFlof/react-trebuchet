@@ -1,7 +1,8 @@
 {
-  "name": "react-slingshot",
-  "version": "1.0.1",
-  "description": "Starter kit for creating apps with React and Redux",
+  "name": "react-trebuchet",
+  "private": true,
+  "version": "0.1.0",
+  "description": "An opinionated extended version of react-slingshot by Cory House",
   "scripts": {
     "prestart": "npm run remove-dist",
     "start": "parallelshell \"npm run test:watch\" \"npm run open\"",
@@ -19,7 +20,10 @@
     "test": "cross-env NODE_ENV=test mocha --reporter progress --compilers js:babel/register --recursive \"./src/**/*.spec.js\"",
     "test:watch": "npm run test -- --watch"
   },
-  "author": "Cory House",
+  "author": "Barry Staes",
+  "contributors": [
+    "Cory House (https://github.com/coryhouse/react-slingshot)"
+  ],
   "license": "MIT",
   "dependencies": {
     "react": "0.14.0",
