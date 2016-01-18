@@ -6,7 +6,8 @@ import './styles/styles.scss'; //Yep, that's right. You can import SASS/CSS file
 
 import { Router, Route } from 'react-router';
 import { createHistory } from 'history';
-import { syncReduxAndRouter } from 'redux-simple-router';
+import { syncHistory } from 'redux-simple-router';
+import { createStore } from 'redux';
 
 import App from './containers/App';
 import FuelSavingsPage from './containers/FuelSavingsPage';
@@ -14,10 +15,8 @@ import FooPage from './containers/FooPage';
 import BarPage from './containers/BarPage';
 import NotFoundPage from './containers/NotFoundPage';
 
-const store = configureStore();
 const history = createHistory();
-
-syncReduxAndRouter(history, store);
+const store = configureStore();
 
 render(
   <Provider store={store}>
