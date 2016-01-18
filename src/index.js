@@ -9,11 +9,7 @@ import { createHistory } from 'history';
 import { syncHistory } from 'redux-simple-router';
 import { createStore } from 'redux';
 
-import App from './containers/App';
-import FuelSavingsPage from './containers/FuelSavingsPage';
-import FooPage from './containers/FooPage';
-import BarPage from './containers/BarPage';
-import NotFoundPage from './containers/NotFoundPage';
+import { App, FuelSavingsPage, FooPage, BarPage, NotFoundPage } from './containers';
 
 const history = createHistory();
 const store = configureStore();
