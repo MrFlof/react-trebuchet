@@ -4,22 +4,18 @@
 
 import { applyMiddleware, createStore, compose } from 'redux';
 import rootReducer from '../reducers';
-import { createHistory } from 'history';
-import { syncHistory } from 'redux-simple-router';
 import DevTools from '../containers/DevTools';
 
-const history = createHistory();
-const storemiddlewareHistory = syncHistory(history);
 
-const finalCreateStore = compose(
-  // Middleware you want to use in development:
-  applyMiddleware(storemiddlewareHistory),
-  // Required! Enable Redux DevTools with the monitors you chose
-  DevTools.instrument()
-)(createStore);
-
-export default function configureStore(initialState) {
+export default function configureStore(initialState, storemiddlewareHistory) {
   // Add middleware
+  const finalCreateStore = compose(
+    // Middleware you want to use in development:
+    applyMiddleware(storemiddlewareHistory),
+    // Required! Enable Redux DevTools with the monitors you chose
+    DevTools.instrument()
+  )(createStore);
+
   const store = finalCreateStore(rootReducer, initialState);
 
   storemiddlewareHistory.listenForReplays(store);

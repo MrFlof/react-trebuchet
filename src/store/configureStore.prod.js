@@ -4,20 +4,16 @@
 
 import { applyMiddleware, createStore, compose } from 'redux';
 import rootReducer from '../reducers';
-import { createHistory } from 'history';
-import { syncHistory } from 'redux-simple-router';
 
-const history = createHistory();
-const storemiddlewareHistory = syncHistory(history);
 
-const finalCreateStore = compose(
-  // Middleware you want to use in production:
-  applyMiddleware(storemiddlewareHistory)
-  // Other store enhancers if you use any
-)(createStore);
-
-export default function configureStore(initialState) {
+export default function configureStore(initialState, storemiddlewareHistory) {
   // Add middleware
+  const finalCreateStore = compose(
+    // Middleware you want to use in production:
+    applyMiddleware(storemiddlewareHistory)
+    // Other store enhancers if you use any
+  )(createStore);
+
   const store = finalCreateStore(rootReducer, initialState);
 
   storemiddlewareHistory.listenForReplays(store);
