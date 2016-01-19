@@ -11,8 +11,10 @@ import { createStore } from 'redux';
 
 import { App, FuelSavingsPage, FooPage, BarPage, NotFoundPage } from './containers';
 
+
 const history = createHistory();
-const store = configureStore();
+const storemiddlewareHistory = syncHistory(history);
+const store = configureStore(undefined, storemiddlewareHistory);
 
 render(
   <Provider store={store}>

@@ -4,17 +4,12 @@
 
 import { applyMiddleware, createStore, compose } from 'redux';
 import rootReducer from '../reducers';
-import { createHistory } from 'history';
-import { syncHistory } from 'redux-simple-router';
 
-const history = createHistory();
-const storemiddlewareHistory = syncHistory(history);
 
-const finalCreateStore = compose(
-  applyMiddleware(storemiddlewareHistory)
-)(createStore);
-
-export default function configureStore(initialState) {
+export default function configureStore(initialState, storemiddlewareHistory) {
+  const finalCreateStore = compose(
+    applyMiddleware(storemiddlewareHistory)
+  )(createStore);
   const store = finalCreateStore(rootReducer, initialState);
 
   storemiddlewareHistory.listenForReplays(store);
