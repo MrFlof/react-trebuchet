@@ -2,13 +2,18 @@
 //This boilerplate file is likely to be the same for each project that uses Redux.
 //With Redux, the actual stores are in /reducers.
 
-import { createStore, compose } from 'redux';
+import { applyMiddleware, createStore, compose } from 'redux';
 import rootReducer from '../reducers';
+import { createHistory } from 'history';
+import { syncHistory } from 'redux-simple-router';
 import DevTools from '../containers/DevTools';
+
+const history = createHistory();
+const storemiddlewareHistory = syncHistory(history);
 
 const finalCreateStore = compose(
   // Middleware you want to use in development:
-  //applyMiddleware(d1, d2, d3),
+  applyMiddleware(storemiddlewareHistory),
   // Required! Enable Redux DevTools with the monitors you chose
   DevTools.instrument()
 )(createStore);
@@ -16,6 +21,8 @@ const finalCreateStore = compose(
 export default function configureStore(initialState) {
   // Add middleware
   const store = finalCreateStore(rootReducer, initialState);
+
+  storemiddlewareHistory.listenForReplays(store);
 
   // Configure the store for hot reloading
   if (module.hot) {
