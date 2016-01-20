@@ -1,7 +1,7 @@
 {
   "name": "react-trebuchet",
   "private": true,
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "An opinionated extended version of react-slingshot by Cory House",
   "scripts": {
     "prestart": "npm run remove-dist",
@@ -27,6 +27,7 @@
   "license": "MIT",
   "dependencies": {
     "history": "1.17.0",
+    "object-assign": "4.0.1",
     "react": "0.14.0",
     "react-dom": "0.14.0",
     "react-redux": "4.0.0",
