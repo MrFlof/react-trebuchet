@@ -6,11 +6,24 @@ import BottlesListItem from './BottlesListItem';
 const BottlesList = (props) => {
   var { bottles } = props;
   return (
-    <ul>
-      {bottles.map((bottle, i) =>
-        <BottlesListItem key={i} bottle={bottle} />
-      )}
-    </ul>
+    <table>
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>Name</th>
+          <th>Brand</th>
+          <th>Type</th>
+          <th>Country</th>
+          <th>Contents cl</th>
+          <th>Alcohol %</th>
+        </tr>
+      </thead>
+      <tbody>
+        {bottles.map((bottle, i) =>
+          <BottlesListItem key={i} bottle={bottle} />
+        )}
+      </tbody>
+    </table>
   );
 };
 
