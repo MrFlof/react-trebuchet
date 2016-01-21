@@ -1,11 +1,14 @@
 import React, { PropTypes } from 'react';
 
+import BottlesListItem from './BottlesListItem';
+
+
 const BottlesList = (props) => {
   var { bottles } = props;
   return (
     <ul>
       {bottles.map((bottle, i) =>
-        <li key={i}>{bottle.name}, {bottle.brand}</li>
+        <BottlesListItem key={i} bottle={bottle} />
       )}
     </ul>
   );
