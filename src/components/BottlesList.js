@@ -4,6 +4,10 @@ import BottlesListItem from './BottlesListItem';
 
 
 const BottlesList = (props) => {
+  const onDelete = function (id) {
+    props.actions.deleteBottle(id);
+  };
+
   var { bottles } = props;
   return (
     <table>
@@ -16,11 +20,12 @@ const BottlesList = (props) => {
           <th>Country</th>
           <th>Contents cl</th>
           <th>Alcohol %</th>
+          <th>actions</th>
         </tr>
       </thead>
       <tbody>
         {bottles.map((bottle, i) =>
-          <BottlesListItem key={i} bottle={bottle} />
+          <BottlesListItem key={i} bottle={bottle} onDelete={onDelete} />
         )}
       </tbody>
     </table>
@@ -28,6 +33,7 @@ const BottlesList = (props) => {
 };
 
 BottlesList.propTypes = {
+  actions: PropTypes.object.isRequired,
   bottles: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     brand: PropTypes.string.isRequired

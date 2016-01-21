@@ -1,38 +1,45 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
+import * as BottlesActions from '../actions/bottlesActions';
 import BottlesList from '../components/BottlesList';
 
-class BottlesPage extends React.Component {
-  render() {
-    const dummyBottles = [
-      {
-        id: 337,
-        name: "Hightland scotch Whisky 12 years",
-        brand: "Glenfarclas",
-        type: "Whisky",
-        country: "Schotland",
-        contents_cl: 5,
-        alcohol_pct: 43
-      },
-      {
-        id: 338,
-        name: "Antartica",
-        brand: "Godet",
-        type: "Cognac",
-        country: "Frankrijk",
-        contents_cl: 5,
-        alcohol_pct: 40
-      }
-    ];
+const BottlesPage = (props) => {
+  const { bottles, actions } = props;
+  return (
+    <div>
+      <h1>The Bottles Page</h1>
+      <p>Work with data via Bottles API</p>
+      <BottlesList bottles={bottles} actions={actions} />
+    </div>
+  );
+};
 
-    return (
-      <div>
-        <h1>The Bottles Page</h1>
-        <p>Work with data via Bottles API</p>
-        <BottlesList bottles={dummyBottles}/>
-      </div>
-    );
-  }
+BottlesPage.propTypes = {
+  actions: PropTypes.object.isRequired,
+  bottles: PropTypes.array.isRequired
+};
+
+// A container component connects (specific state and actions) to Redux using the code below. Learn more at
+// https://github.com/rackt/react-redux/blob/4fca3cbc736b7462de65f589d3b0fdab0cb7a495/docs/quick-start.md
+
+// Which part of the Redux global state does our component want to receive as props?
+function mapStateToProps(state) {
+  return {
+    bottles: state.bottlesAppState
+  };
 }
 
-export default BottlesPage;
+// Which action creators does it want to receive by props?
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(BottlesActions, dispatch)
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(BottlesPage);
+
