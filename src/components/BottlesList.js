@@ -1,11 +1,26 @@
 import React, { PropTypes } from 'react';
 
 import BottlesListItem from './BottlesListItem';
+import BottlesListAdd from './BottlesListAdd';
 
 
 const BottlesList = (props) => {
   const onDelete = function (id) {
     props.actions.deleteBottle(id);
+  };
+
+  const onAdd = function () {
+    //props.actions.addBottle()
+  };
+
+  const handleAdd = function (e) {
+    e.preventDefault();
+    var f = e.target.form;
+    console.log(e);
+    console.log(e.ref.name.valueOf());
+
+
+    //props.actions.addBottle(id);
   };
 
   var { bottles } = props;
@@ -24,10 +39,19 @@ const BottlesList = (props) => {
         </tr>
       </thead>
       <tbody>
-        {bottles.map((bottle, i) =>
-          <BottlesListItem key={i} bottle={bottle} onDelete={onDelete} />
-        )}
+        {bottles.length > 0 ?
+          bottles.map((bottle, i) =>
+            <BottlesListItem key={i} bottle={bottle} onDelete={onDelete}/>
+          )
+          :
+          <tr><td colSpan="8">Nothing here.</td></tr>
+        }
       </tbody>
+      <tfoot>
+        <tr><td colSpan="8">
+          <BottlesListAdd onAdd={onAdd} />
+        </td></tr>
+      </tfoot>
     </table>
   );
 };

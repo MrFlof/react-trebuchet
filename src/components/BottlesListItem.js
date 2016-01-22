@@ -20,7 +20,8 @@ const BottlesListItem = (props) => {
 };
 
 BottlesListItem.propTypes = {
-  bottle: PropTypes.object.isRequired
+  bottle: PropTypes.object.isRequired,
+  onDelete: PropTypes.func.isRequired
 };
 
 export default BottlesListItem;
