@@ -5,16 +5,18 @@ import { connect } from 'react-redux';
 import * as BottlesActions from '../actions/bottlesActions';
 import BottlesList from '../components/BottlesList';
 
-const BottlesPage = (props) => {
-  const { bottles, actions } = props;
-  return (
-    <div>
-      <h1>The Bottles Page</h1>
-      <p>Work with data via Bottles API</p>
-      <BottlesList bottles={bottles} actions={actions} />
-    </div>
-  );
-};
+class BottlesPage extends React.Component {
+  render() {
+    const { bottles, actions } = this.props;
+    return (
+      <div>
+        <h1>The Bottles Page</h1>
+        <p>Work with data via Bottles API</p>
+        <BottlesList bottles={bottles} actions={actions}/>
+      </div>
+    );
+  }
+}
 
 BottlesPage.propTypes = {
   actions: PropTypes.object.isRequired,
