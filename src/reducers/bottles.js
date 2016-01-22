@@ -1,4 +1,4 @@
-import { DELETE_BOTTLE } from '../constants/ActionTypes';
+import { ADD_BOTTLE, DELETE_BOTTLE } from '../constants/ActionTypes';
 import objectAssign from 'object-assign';
 
 const initialState = [
@@ -39,23 +39,18 @@ const initialState = [
 export default function bottlesAppState(state = initialState, action) {
 	switch (action.type) {
 
-		//case ADD_BOTTLE:
-    //  return [
-    //    {
-    //      id: state.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1,
-    //      name: action.name,
-    //      brand: action.brand,
-    //      type: action.type,
-    //      country: action.country,
-    //      contents_cl: action.contents_cl,
-    //      alcohol_pct: action.alcohol_pct
-    //    },
-    //    ...state
-    //  ];
+    case ADD_BOTTLE:
+      return [
+        {
+          id: state.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1,
+          ...action.payload.bottle
+        },
+        ...state
+      ];
 
     case DELETE_BOTTLE:
       return state.filter(bottle =>
-        bottle.id !== action.id
+        bottle.id !== action.payload.bottleid
       );
 
     //case EDIT_BOTTLE:

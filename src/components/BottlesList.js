@@ -9,18 +9,8 @@ const BottlesList = (props) => {
     props.actions.deleteBottle(id);
   };
 
-  const onAdd = function () {
-    //props.actions.addBottle()
-  };
-
-  const handleAdd = function (e) {
-    e.preventDefault();
-    var f = e.target.form;
-    console.log(e);
-    console.log(e.ref.name.valueOf());
-
-
-    //props.actions.addBottle(id);
+  const onAdd = function (bottle) {
+    props.actions.addBottle(bottle);
   };
 
   var { bottles } = props;
