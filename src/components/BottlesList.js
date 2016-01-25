@@ -13,6 +13,10 @@ const BottlesList = (props) => {
     props.actions.addBottle(bottle);
   };
 
+  const onEdit = function (id, bottle) {
+    props.actions.editBottle(id, bottle);
+  };
+
   var { bottles } = props;
   return (
     <table>
@@ -31,7 +35,7 @@ const BottlesList = (props) => {
       <tbody>
         {bottles.length > 0 ?
           bottles.map((bottle, i) =>
-            <BottlesListItem key={i} bottle={bottle} onDelete={onDelete}/>
+            <BottlesListItem key={i} bottle={bottle} onDelete={onDelete} onEdit={onEdit} />
           )
           :
           <tr><td colSpan="8">Nothing here.</td></tr>

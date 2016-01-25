@@ -13,11 +13,17 @@ export function deleteBottle(id) {
 	return {
     type: types.DELETE_BOTTLE,
     payload: {
-      bottleid: id
+      id: id
     }
   };
 }
 
-//export function editBottle(id) {
-//	return { type: types.EDIT_BOTTLE,  };
-//}
+export function editBottle(id, bottle) {
+	return {
+    type: types.EDIT_BOTTLE,
+    payload: {
+      id: id,
+      bottle: bottle
+    }
+  };
+}
