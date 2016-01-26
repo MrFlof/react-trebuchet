@@ -15,7 +15,7 @@ It is based on `react-slingshot` by Cory House, which is a very complete but not
 
 # React Slingshot!
 
-React Slingshot is a comprehensive framework for rapid application development using React. It offers a rich development experience including:
+React Slingshot is a comprehensive starter kit for rapid application development using React. It offers a rich development experience including:
 
 | **Tech** | **Description** |**Learn More**|
 |----------|-------|---|
@@ -38,12 +38,12 @@ The starter kit includes a working example app that puts all of the above to use
 2. **Clone the project**. `git clone https://github.com/coryhouse/react-slingshot.git`.  
 3. **Install Node packages**. `npm install`
 4. **Run the example app**. `npm start -s`  
-This will run the automated build process, start up a webserver, and open the application in your default browser. When doing development with this kit, you'll want to keep the command line open at all times so that your code is rebuilt and tests run automatically every time you hit save. Note: The -s flag is optional. It enables silent mode which supresses unnecessary messages during the build.
+This will run the automated build process, start up a webserver, and open the application in your default browser. When doing development with this kit, you'll want to keep the command line open at all times so that your code is rebuilt and tests run automatically every time you hit save. Note: The -s flag is optional. It enables silent mode which suppresses unnecessary messages during the build.
 5. **Review the example app.** This starter kit includes a working example app that calculates fuel savings. Note how all source code is placed under /src. Tests are placed alongside the file under test. The final built app is placed under /dist. These are the files you run in production.
-6. **Delete the example app files.** Once you're comfortable with how the example app works, you can [delete those files and begin creating your own app](https://github.com/coryhouse/react-slingshot#i-just-want-an-empty-starter-kit). You can always refer to this repo for the example app code that you deleted.
+6. **Delete the example app files.** Once you're comfortable with how the example app works, you can [delete those files and begin creating your own app](https://github.com/coryhouse/react-slingshot#i-just-want-an-empty-starter-kit).
 
 ##Initial Machine Setup
-1. **Install [Node](https://nodejs.org)**.  
+1. **Install [Node 4.0.0 or greater](https://nodejs.org)**
 2. **Install [Git](https://git-scm.com/downloads)**. 
 3. On a Mac? You're all set. If you're on Linux or Windows, complete the steps for your OS below.  
  
@@ -79,6 +79,49 @@ Unfortunately, scripts in package.json can't be commented inline because the JSO
 | build:verbose | Same as above, but verbose so you can see all the details happening including warnings. |
 | test | Runs tests (files ending in .spec.js) using Mocha and outputs results to the command line. Watches all files so tests are re-run upon save. |
 
+###Can you explain the file structure?
+```
+.
+├── .babelrc                  # Configures Babel
+├── .editorconfig             # Configures editor rules
+├── .eslintrc                 # Configures ESLint
+├── .gitignore                # Tells git which files to ignore
+├── README.md                 # This file.
+├── dist                      # Folder where the build script places the built app. Use this in prod.
+├── package.json              # Package configuration. The list of 3rd party libraries and utilities
+├── src                       # Source code
+│   ├── actions               # Flux/Redux actions. List of distinct actions that can occur in the app.  
+│   ├── businessLogic         # Plain old JS objects (POJOs). Pure logic. No framework specific code here.
+│   ├── components            # React components
+│   ├── constants             # Application constants including constants for Redux
+│   ├── containers            # App container for Redux
+│   ├── favicon.ico           # favicon to keep your browser from throwing a 404 during dev. Not actually used in prod build.
+│   ├── index.html            # Start page 
+│   ├── index.js              # Entry point for your app
+│   ├── reducers              # Redux reducers. Your state is altered here based on actions
+│   ├── store                 # Redux store configuration
+│   └── styles                # CSS Styles, typically written in Sass
+├── tools                     # Node scripts that run build related tools
+│   ├── build.js              # Runs the production build
+│   ├── buildHtml.js          # Builds index.html
+│   ├── distServer.js         # Starts webserver and opens final built app that's in dist in your default browser
+│   ├── srcServer.js          # Starts dev webserver with hot reloading and opens your app in your default browser
+└── webpack.config.js         # Configures webpack
+```
+
+
+###Where are the files being served from when I run `npm start`?
+Webpack serves your app in memory when you run `npm start`. No physical files are written. However, the web root is /src, so you can reference files under /src in index.html. When the app is built using `npm run build`, the app is served from the /dist directory.
+
+###How is Sass being converted into CSS and landing in the browser?
+Magic! Okay, more specifically: Webpack handles it like this:
+ 1. The sass-loader compiles Sass into CSS
+ 2. Webpack bundles the compiled CSS into bundle.js. Sounds odd, but it works! 
+ 3. Loads styles into the <head> of index.html via JavaScript. This is why you don't see a stylesheet reference in index.html. In fact, if you disable JavaScript in your browser, you'll see the styles don't load either. This process is performed for both dev (`npm start`) and production (`npm run build`). Oh, and since we're generating source maps, you can even see the original Sass source in [compatible browsers](http://thesassway.com/intermediate/using-source-maps-with-sass).
+ 
+###I don't like the magic you just described above. I simply want to use a CSS file.
+No problem. Reference your CSS file in index.html, and add a step to the build process to copy your CSS file over to the same relative location /dist as part of the build step. But be forwarned, you lose style hot reloading with this approach.
+
 ### I just want an empty starter kit.
 This starter kit includes an example app so you can see how everything hangs together on a real app. To create an empty project, you can delete the following:  
 1. Components in src/components  
@@ -88,13 +131,23 @@ This starter kit includes an example app so you can see how everything hangs tog
 Don't want to use Redux? See the next question for some steps on removing Redux.
 
 ### Do I have to use Redux?
-Nope. Redux is useful for applications with more complex data flows. If your app is simple, Redux may be overkill. In that case, you can uninstall Redux and delete the following folders:
+Nope. Redux is useful for applications with more complex data flows. If your app is simple, Redux may be overkill. In that case, you can uninstall Redux and delete the following folders (and their contents):
 * actions
 * constants
 * reducers
 * containers
+* store
 
-In main.js, reference your top level component (instead of Redux's root container at ./containers/root).
+Then, update index.js:
+ 1. `npm uninstall redux react-redux`. 
+ 2. Remove the following imports: `import configureStore from './store/configureStore';` and `import { Provider } from 'react-redux';`
+ 3. Create a new top level component and reference it in the render method. 
+
+### How do I deploy this?
+`npm run build`. This will build the project for production. It does the following:
+* Minifies all JS
+* Sets NODE_ENV to prod so that React is built in production mode
+* Places the resulting built project files into /dist. (This is the folder you'll expose to the world).
 
 ### Why are test files placed alongside the file under test (instead of centralized)? 
 Streamlined automated testing is a core feature of this starter kit. All tests are placed in files that end in .spec.js. Spec files are placed in the same directory as the file under test. Why?
@@ -117,14 +170,11 @@ Also note that no actual physical files are written to the filesystem during the
 2. Do **not** enable serving files from your filesystem in Chrome dev tools. If you do, Chrome (and perhaps other browsers) may not show you the latest version of your code after you make a source code change. Instead **you must close the source view tab you were using and reopen it to see the updated source code**. It appears Chrome clings to the old sourcemap until you close and reopen the source view tab. To clarify, you don't have to close the actual tab that is displaying the app, just the tab in the console that's displaying the source file that you just changed.  
 3. If the latest source isn't displaying the console, force a refresh. Sometimes Chrome seems to hold onto a previous version of the sourcemap which will cause you to see stale code.
 
-### How do I deploy this?
-Before committing, type `npm run build`. This will setup the project for production. It does the following:
-* Minifies all JS
-* Sets NODE_ENV to prod so that React is built in production mode
-* Places the resulting built project files into /dist. (This is the folder you'll expose to the world).
-
 ### I'm getting an error when running npm install: Failed to locate "CL.exe"
 On Windows, you need to install extra dependencies for browser-sync to build and install successfully. Follow the getting started steps above to assure you have the necessary dependencies on your machine.
 
 ### I can't access the external URL for Browsersync
 To hit the external URL, all devices must be on the same LAN. So this may mean your dev machine needs to be on the same Wifi as the mobile devices you're testing.
+
+###What about the Redux Devtools?
+They're not included at this time to keep the project simple. If you're interested, Barry Staes created a [branch with the devtools incorporated](https://github.com/coryhouse/react-slingshot/pull/27).
