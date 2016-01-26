@@ -1,35 +1,10 @@
 import { ADD_BOTTLE, DELETE_BOTTLE, EDIT_BOTTLE } from '../constants/ActionTypes';
 import objectAssign from 'object-assign';
 
-const initialState = [
-  {
-    id: 1,
-    name: "Volle melk",
-    brand: "Campina",
-    type: "Overig",
-    country: "Nederland",
-    contents_cl: 1000,
-    alcohol_pct: 0.3
-  },
-  {
-    id: 337,
-    name: "Hightland scotch Whisky 12 years",
-    brand: "Glenfarclas",
-    type: "Whisky",
-    country: "Schotland",
-    contents_cl: 5,
-    alcohol_pct: 43
-  },
-  {
-    id: 338,
-    name: "Antartica",
-    brand: "Godet",
-    type: "Cognac",
-    country: "Frankrijk",
-    contents_cl: 5,
-    alcohol_pct: 40
-  }
-];
+const initialState = {
+  // todo add store meta data
+  items: []
+};
 
 //IMPORTANT: Note that with Redux, state should NEVER be changed.
 //State is considered immutable. Instead,
@@ -40,26 +15,31 @@ export default function bottlesAppState(state = initialState, action) {
 	switch (action.type) {
 
     case ADD_BOTTLE:
-      return [
-        {
-          id: state.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1,
-          ...action.payload.bottle
-        },
-        ...state
-      ];
+      return {
+        ...state,
+        items: [
+          ...state.items,
+          {
+            id: state.items.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1,
+            ...action.payload.bottle
+          }
+        ]
+      };
 
     case DELETE_BOTTLE:
-      return state.filter(bottle =>
-        bottle.id !== action.payload.id
-      );
+      return {
+        ...state,
+        items: state.items.filter(bottle => bottle.id !== action.payload.id)
+      };
 
     case EDIT_BOTTLE:
-      return state.map(bottle =>
-        bottle.id === action.payload.id ?
-          Object.assign({}, bottle, action.payload.bottle)
-          :
-          bottle
-      );
+      return {
+        ...state,
+        items: state.items.map(bottle =>
+          bottle.id === action.payload.id ?
+            Object.assign({}, bottle, action.payload.bottle) : bottle
+        )
+      };
 
 		default:
 			return state;
