@@ -9,7 +9,7 @@ import { createHistory } from 'history';
 import { syncHistory } from 'redux-simple-router';
 import { createStore } from 'redux';
 
-import { App, FuelSavingsPage, SimpleCounterPage, FooPage, BarPage, NotFoundPage } from './containers';
+import { App, FuelSavingsPage, SimpleCounterPage, BottlesPage, FooPage, BarPage, NotFoundPage } from './containers';
 
 
 const history = createHistory();
@@ -22,6 +22,7 @@ render(
       <Route path="/" component={App}>
         <Route path="fuelsavings" component={FuelSavingsPage}/>
         <Route path="simplecounter" component={SimpleCounterPage}/>
+        <Route path="bottles" component={BottlesPage}/>
         <Route path="foo" component={FooPage}/>
         <Route path="bar" component={BarPage}/>
         <Route path="*" component={NotFoundPage}/>

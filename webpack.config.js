@@ -15,7 +15,7 @@ var getPlugins = function(env) {
     new webpack.DefinePlugin(GLOBALS)
   ];
   // NODE_ENV allows React to build in prod mode. https://facebook.github.io/react/downloads.html
-  // NODE_ENV allows DevTools component to be included in dev mode.
+  // NODE_ENV allows redux-devtools module and DevTools component to be included in dev mode.
 
   switch(env) {
     case 'production':
@@ -27,9 +27,6 @@ var getPlugins = function(env) {
       plugins.push(new webpack.NoErrorsPlugin());
       break;
   }
-
-  // This allows DevTools component to be included
-  plugins.push(new webpack.DefinePlugin({'process.env.NODE_ENV': JSON.stringify(env)}));
 
   return plugins;
 };
