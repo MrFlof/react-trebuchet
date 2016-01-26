@@ -11,6 +11,7 @@ Which makes it opinionated. This is a base for my future react SPA projects.
 
 It is based on `react-slingshot` by Cory House, which is a very complete but not overly complex starter kit. Go check it out:
 
+-----
 
 # React Slingshot!
 

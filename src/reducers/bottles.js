@@ -15,29 +15,23 @@ export default function bottlesAppState(state = initialState, action) {
 	switch (action.type) {
 
     case ADD_BOTTLE:
-      return {
-        ...state,
-        items: [
-          ...state.items,
-          {
-            id: state.items.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1,
-            ...action.payload.bottle
-          }
-        ]
-      };
+      return {...state, items: [
+        ...state.items,
+        {
+          id: state.items.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1, // interim
+          ...action.payload.bottle
+        }
+      ]};
 
     case DELETE_BOTTLE:
-      return {
-        ...state,
+      return {...state,
         items: state.items.filter(bottle => bottle.id !== action.payload.id)
       };
 
     case EDIT_BOTTLE:
-      return {
-        ...state,
-        items: state.items.map(bottle =>
-          bottle.id === action.payload.id ?
-            Object.assign({}, bottle, action.payload.bottle) : bottle
+      return {...state, items:
+        state.items.map(
+          bottle => bottle.id === action.payload.id ? Object.assign({}, bottle, action.payload.bottle) : bottle
         )
       };
 
