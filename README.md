@@ -1,3 +1,17 @@
+# React Trebuchet
+
+An extended version of react-slingshot (see below) that adds:
+
+  - [x] Pages and router (using redux-simple-router which uses react-router)
+  - [x] Debug app state (using redux-devtools)
+  - [ ] Example CRUD on [a REST API](https://github.com/barrystaes/jsonserver-bottledapi) (using ???)
+  - [ ] Example JWT for authentication and authorization (using ???)
+
+Which makes it opinionated. This is a base for my future react SPA projects.
+
+It is based on `react-slingshot` by Cory House, which is a very complete but not overly complex starter kit. Go check it out:
+
+
 # React Slingshot!
 
 React Slingshot is a comprehensive framework for rapid application development using React. It offers a rich development experience including:
