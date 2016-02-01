@@ -3,6 +3,8 @@
 //With Redux, the actual stores are in /reducers.
 
 import { applyMiddleware, createStore, compose } from 'redux';
+import { apiMiddleware } from 'redux-api-middleware';
+
 import rootReducer from '../reducers';
 
 
@@ -10,7 +12,10 @@ export default function configureStore(initialState, storemiddlewareHistory) {
   // Add middleware
   const finalCreateStore = compose(
     // Middleware you want to use in production:
-    applyMiddleware(storemiddlewareHistory)
+    applyMiddleware(
+      storemiddlewareHistory,
+      apiMiddleware
+    )
     // Other store enhancers if you use any
   )(createStore);
 

@@ -3,6 +3,8 @@
 //With Redux, the actual stores are in /reducers.
 
 import { applyMiddleware, createStore, compose } from 'redux';
+import { apiMiddleware } from 'redux-api-middleware';
+
 import rootReducer from '../reducers';
 import DevTools from '../containers/DevTools';
 
@@ -11,7 +13,10 @@ export default function configureStore(initialState, storemiddlewareHistory) {
   // Add middleware
   const finalCreateStore = compose(
     // Middleware you want to use in development:
-    applyMiddleware(storemiddlewareHistory),
+    applyMiddleware(
+      storemiddlewareHistory,
+      apiMiddleware
+    ),
     // Required! Enable Redux DevTools with the monitors you chose
     DevTools.instrument()
   )(createStore);
