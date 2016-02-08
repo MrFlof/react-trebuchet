@@ -13,8 +13,8 @@ export default function configureStore(initialState, storemiddlewareHistory) {
   const finalCreateStore = compose(
     // Middleware you want to use in production:
     applyMiddleware(
-      storemiddlewareHistory,
-      apiMiddleware
+      apiMiddleware,
+      storemiddlewareHistory
     )
     // Other store enhancers if you use any
   )(createStore);
