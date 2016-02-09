@@ -10,7 +10,9 @@ import BottlesList from '../components/BottlesList';
 class BottlesPage extends React.Component {
   constructor(props) {
     super(props);
-    this.handleLoadCollection = this.handleLoadCollection.bind(this);
+    this.handleLoadCollection1 = this.handleLoadCollection1.bind(this);
+    this.handleLoadCollection2 = this.handleLoadCollection2.bind(this);
+    this.handleLoadCollection3 = this.handleLoadCollection3.bind(this);
   }
 
   render() {
@@ -20,14 +22,24 @@ class BottlesPage extends React.Component {
         <h1>The Bottles Page</h1>
         <p>Work with data via Bottles API</p>
         <BottlesList bottles={bottles} actions={actions}/>
-        <input type="button" value="Test fetchCollection 1" onClick={this.handleLoadCollection} />
+        <input type="button" value="Test fetchCollection 1" onClick={this.handleLoadCollection1} />
+        <input type="button" value="Test fetchCollection 2" onClick={this.handleLoadCollection2} />
+        <input type="button" value="Test fetchCollection 3" onClick={this.handleLoadCollection3} />
       </div>
     );
   }
 
-  handleLoadCollection(e) {
+  handleLoadCollection1(e) {
     //e.preventDefault();
     this.onFetchCollection(1);
+  }
+  handleLoadCollection2(e) {
+    //e.preventDefault();
+    this.onFetchCollection(2);
+  }
+  handleLoadCollection3(e) {
+    //e.preventDefault();
+    this.onFetchCollection(3);
   }
 
   onFetchCollection(collectionid) {

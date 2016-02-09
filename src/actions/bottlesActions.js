@@ -41,7 +41,7 @@ export function editBottle(id, bottle) {
 export function fetchCollection(collectionId) {
   return {
     [CALL_API]: {
-      endpoint: 'http://10.13.0.125:3030/collections/1/?_embed=bottles',
+      endpoint: 'http://10.13.0.125:3030/collections/'+collectionId+'/?_embed=bottles',
       method: 'GET',
       types: [
         'FETCHCOLLECTION_REQUEST',
