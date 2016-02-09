@@ -44,9 +44,13 @@ export function fetchCollection(collectionId) {
       endpoint: 'http://10.13.0.125:3030/collections/'+collectionId+'/?_embed=bottles',
       method: 'GET',
       types: [
-        'FETCHCOLLECTION_REQUEST',
+        types.FETCHCOLLECTION_REQUEST,
+        //{
+        //  type: types.FETCHCOLLECTION_REQUEST,
+        //  payload: { collectionId: collectionId }
+        //},
         {
-          type: 'FETCHCOLLECTION_SUCCESS',
+          type: types.FETCHCOLLECTION_SUCCESS,
             payload: (action, state, res) => {
             const contentType = res.headers.get('Content-Type');
             if (contentType && ~contentType.indexOf('json')) {
@@ -55,9 +59,8 @@ export function fetchCollection(collectionId) {
             }
           }
         },
-        'FETCHCOLLECTION_FAILURE'
+        types.FETCHCOLLECTION_FAILURE
       ]
     }
   };
-  // a SUCCESS results in Normalizr using the bottles:[]
 }
