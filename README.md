@@ -4,7 +4,7 @@ An extended version of react-slingshot (see below) that adds:
 
   - [x] Pages and router (using redux-simple-router which uses react-router)
   - [x] Debug app state (using redux-devtools)
-  - [ ] Example CRUD on [a REST API](https://github.com/barrystaes/jsonserver-bottledapi) (using ???)
+  - [ ] Example CRUD on [a REST API](https://github.com/barrystaes/jsonserver-bottledapi) using `redux-api-middleware`.
   - [ ] Example JWT for authentication and authorization (using ???)
 
 Which makes it opinionated. This is a base for my future react SPA projects.
@@ -20,7 +20,7 @@ React Slingshot is a comprehensive starter kit for rapid application development
 | **Tech** | **Description** |**Learn More**|
 |----------|-------|---|
 |  [React](https://facebook.github.io/react/)  |   Fast, composable client-side components.    | [Pluralsight Course](https://www.pluralsight.com/courses/react-flux-building-applications)  |
-|  [Redux](http://redux.js.org) |  Enforces unidirectional data flows and immutable, hot reloadable store. Lean alternative to [Facebook's Flux](https://facebook.github.io/flux/docs/overview.html).| [Tutorial](https://egghead.io/series/getting-started-with-redux)    |
+|  [Redux](http://redux.js.org) |  Enforces unidirectional data flows and immutable, hot reloadable store. Supports time-travel debugging. Lean alternative to [Facebook's Flux](https://facebook.github.io/flux/docs/overview.html).| [Tutorial](https://egghead.io/series/getting-started-with-redux)    |
 |  [Babel](http://babeljs.io) |  Compiles ES6 to ES5. Enjoy the new version of JavaScript today.     | [ES6 REPL](https://babeljs.io/repl/), [ES6 vs ES5](http://es6-features.org), [ES6 Katas](http://es6katas.org), [Pluralsight course](https://www.pluralsight.com/courses/javascript-fundamentals-es6)    |
 | [Webpack](http://webpack.github.io) | Bundles npm packages and our JS into a single file. Includes hot reloading via [react-transform-hmr](https://www.npmjs.com/package/react-transform-hmr). | [Quick Webpack How-to](https://github.com/petehunt/webpack-howto) [Pluralsight Course](https://www.pluralsight.com/courses/webpack-fundamentals)|
 | [Browsersync](https://www.browsersync.io/) | Lightweight development HTTP server that supports synchronized testing and debugging on multiple devices. | [Intro vid](https://www.youtube.com/watch?time_continue=1&v=heNWfzc7ufQ)|
@@ -45,7 +45,8 @@ This will run the automated build process, start up a webserver, and open the ap
 ##Initial Machine Setup
 1. **Install [Node 4.0.0 or greater](https://nodejs.org)**
 2. **Install [Git](https://git-scm.com/downloads)**. 
-3. On a Mac? You're all set. If you're on Linux or Windows, complete the steps for your OS below.  
+3. **Install [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en) and [Redux Dev Tools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en)** in Chrome. (Optional, but helpful. The latter offers time-travel debugging.)
+4. On a Mac? You're all set. If you're on Linux or Windows, complete the steps for your OS below.  
  
 **On Linux:**  
 
@@ -54,8 +55,8 @@ This will run the automated build process, start up a webserver, and open the ap
 
 **On Windows:** 
  
- * **Install [Python 2.7](https://www.python.org/downloads/)**. Browser-sync (and various other Node modules) rely on node-gyp, which requires Python on Windows.  
- * **Install C++ Compiler**. [Visual Studio Express](https://www.visualstudio.com/en-US/products/visual-studio-express-vs) comes bundled with a free C++ compiler. Or, if you already have Visual Studio installed: Open Visual Studio and go to File -> New -> Project -> Visual C++ -> Install Visual C++ Tools for Windows Desktop. The C++ compiler is used to compile browser-sync (and perhaps other Node modules).
+ * **Install [Python 2.7](https://www.python.org/downloads/)**. Some node modules may rely on node-gyp, which requires Python on Windows.
+ * **Install C++ Compiler**. Browser-sync requires a C++ compiler on Windows. [Visual Studio Express](https://www.visualstudio.com/en-US/products/visual-studio-express-vs) comes bundled with a free C++ compiler. Or, if you already have Visual Studio installed: Open Visual Studio and go to File -> New -> Project -> Visual C++ -> Install Visual C++ Tools for Windows Desktop. The C++ compiler is used to compile browser-sync (and perhaps other Node modules).
 
 ##FAQ
 ###Why does this exist?
@@ -68,13 +69,11 @@ Unfortunately, scripts in package.json can't be commented inline because the JSO
 |----------|-------|
 | prestart | Runs automatically before start. Calls remove-dist script which deletes the dist folder. This helps remind you to run the build script before committing since the dist folder will be deleted if you don't. ;) |
 | start | Runs tests, lints, starts dev webserver, and opens the app in your default browser. |
-| open | Opens the app in your default browser. |
 | lint:tools | Runs ESLint on build related JS files. (eslint-loader lints src files via webpack when `npm start` is run) |
 | clean-dist | Removes everything from the dist folder. |
 | remove-dist | Deletes the dist folder. |
 | create-dist | Creates the dist folder and the necessary subfolders. |
 | build:html | Adds trackJS tracking script and copies to /dist. |
-| build:sass | Compiles SASS, minifies, generates sourcemap, and stores in /dist. |
 | prebuild | Runs automatically before build script (due to naming convention). Cleans dist folder, builds html, and builds sass. |
 | build | Bundles all JavaScript using webpack and writes it to /dist. |
 | test | Runs tests (files ending in .spec.js) using Mocha and outputs results to the command line. Watches all files so tests are re-run upon save. |

@@ -1,9 +1,9 @@
-const App = require('./App');
-const FuelSavingsPage = require('./FuelSavingsPage');
-const SimpleCounterPage = require('./SimpleCounterPage');
-const BottlesPage = require('./BottlesPage');
-const BarPage = require('./BarPage');
-const FooPage = require('./FooPage');
-const NotFoundPage = require('./NotFoundPage');
+import App from './App';
+import FuelSavingsPage from './FuelSavingsPage';
+import SimpleCounterPage from './SimpleCounterPage';
+import BottlesPage from './BottlesPage';
+import BarPage from './BarPage';
+import FooPage from './FooPage';
+import NotFoundPage from './NotFoundPage';
 
 module.exports = { App, FuelSavingsPage, SimpleCounterPage, BottlesPage, BarPage, FooPage, NotFoundPage };
