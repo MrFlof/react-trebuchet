@@ -20,6 +20,7 @@ render(
       <Route path="/" component={Containers.App}>
         <Route path="fuelsavings" component={Containers.FuelSavingsPage}/>
         <Route path="simplecounter" component={Containers.SimpleCounterPage}/>
+        <Route path="collections" component={Containers.CollectionsPage}/>
         <Route path="bottles" component={Containers.BottlesPage}/>
         <Route path="foo" component={Containers.FooPage}/>
         <Route path="bar" component={Containers.BarPage}/>

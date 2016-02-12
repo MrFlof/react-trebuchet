@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { CALL_API } from 'redux-api-middleware';
 
 import * as BottlesActions from '../actions/bottlesActions';
 import BottlesList from '../components/BottlesList';
