@@ -10,6 +10,7 @@ class CollectionsPage extends React.Component {
     super(props);
     this.handleLoadCollections = this.handleLoadCollections.bind(this);
     this.handleEditCollection = this.handleEditCollection.bind(this);
+    this.handleAddCollection = this.handleAddCollection.bind(this);
   }
 
   render() {
@@ -20,6 +21,7 @@ class CollectionsPage extends React.Component {
         <p>Work with data via Bottles API</p>
         <input type="button" value="fetchCollections alles" onClick={this.handleLoadCollections} />
         <input type="button" value="patch test" onClick={this.handleEditCollection} />
+        <input type="button" value="create test" onClick={this.handleAddCollection} />
         <pre>{JSON.stringify(collections,2)}</pre>{/*<CollectionsList bottles={collections} actions={actions}/>*/}
       </div>
     );
@@ -33,6 +35,11 @@ class CollectionsPage extends React.Component {
     //e.preventDefault();
     const name = "Bla-" + Number(Math.floor(Math.random()*65536)).toString(16).toUpperCase();
     this.props.actions.patchCollection(3, {name: name, barrytest: "123patched"});
+  }
+  handleAddCollection(e) {
+    //e.preventDefault();
+    const name = "New-" + Number(Math.floor(Math.random()*65536)).toString(16).toUpperCase();
+    this.props.actions.createCollection({name: name, barrytest: "123created"});
   }
 }
 

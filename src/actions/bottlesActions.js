@@ -124,3 +124,31 @@ export function patchCollection(collectionId, collection) {
     }
   };
 }
+
+export function createCollection(collection) {
+  return {
+    [CALL_API]: {
+      endpoint: API_ROOT + '/collections/',
+      method: 'POST',
+      headers: {
+        'Cache-Control': 'no-cache',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(collection),
+      types: [
+        types.CREATECOLLECTION_REQUEST,
+        {
+          type: types.CREATECOLLECTION_SUCCESS,
+          payload: (action, state, res) => {
+            const contentType = res.headers.get('Content-Type');
+            if (contentType && ~contentType.indexOf('json')) {
+              // Just making sure res.json() does not raise an error
+              return res.json().then((json) => normalize(json, collectionSchema));
+            }
+          }
+        },
+        types.CREATECOLLECTION_FAILURE
+      ]
+    }
+  };
+}
