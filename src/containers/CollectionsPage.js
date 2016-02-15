@@ -9,6 +9,7 @@ class CollectionsPage extends React.Component {
   constructor(props) {
     super(props);
     this.handleLoadCollections = this.handleLoadCollections.bind(this);
+    this.handleEditCollection = this.handleEditCollection.bind(this);
   }
 
   render() {
@@ -18,6 +19,7 @@ class CollectionsPage extends React.Component {
         <h1>The Collections Page</h1>
         <p>Work with data via Bottles API</p>
         <input type="button" value="fetchCollections alles" onClick={this.handleLoadCollections} />
+        <input type="button" value="patch test" onClick={this.handleEditCollection} />
         <pre>{JSON.stringify(collections,2)}</pre>{/*<CollectionsList bottles={collections} actions={actions}/>*/}
       </div>
     );
@@ -27,11 +29,16 @@ class CollectionsPage extends React.Component {
     //e.preventDefault();
     this.props.actions.fetchCollections();
   }
+  handleEditCollection(e) {
+    //e.preventDefault();
+    const name = "Bla-" + Number(Math.floor(Math.random()*65536)).toString(16).toUpperCase();
+    this.props.actions.patchCollection(3, {name: name, barrytest: "123patched"});
+  }
 }
 
 CollectionsPage.propTypes = {
   actions: PropTypes.object.isRequired,
-  collections: PropTypes.array.isRequired
+  collections: PropTypes.object.isRequired
 };
 
 // A container component connects (specific state and actions) to Redux using the code below. Learn more at

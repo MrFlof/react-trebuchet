@@ -4,6 +4,8 @@ import { Schema, arrayOf, normalize } from 'normalizr';
 import * as types from '../constants/ActionTypes';
 
 
+const API_ROOT = 'http://10.13.0.136:3030'; // Change this
+
 // Normalizr schema setup:
 const collectionSchema = new Schema('collections');
 const bottleSchema = new Schema('bottles');
@@ -47,7 +49,7 @@ export function editBottle(id, bottle) {
 export function fetchCollection(collectionId) {
   return {
     [CALL_API]: {
-      endpoint: 'http://10.13.0.121:3030/collections/'+collectionId+'/?_embed=bottles',
+      endpoint: API_ROOT + '/collections/'+collectionId+'/?_embed=bottles',
       method: 'GET',
       types: [
         types.FETCHCOLLECTION_REQUEST,
@@ -75,7 +77,7 @@ export function fetchCollection(collectionId) {
 export function fetchCollections() {
   return {
     [CALL_API]: {
-      endpoint: 'http://10.13.0.121:3030/collections/',
+      endpoint: API_ROOT + '/collections/',
       method: 'GET',
       types: [
         types.FETCHCOLLECTIONS_REQUEST,
@@ -90,6 +92,34 @@ export function fetchCollections() {
           }
         },
         types.FETCHCOLLECTIONS_FAILURE
+      ]
+    }
+  };
+}
+
+export function patchCollection(collectionId, collection) {
+  return {
+    [CALL_API]: {
+      endpoint: API_ROOT + '/collections/'+collectionId+'/',
+      method: 'PATCH',
+      headers: {
+        'Cache-Control': 'no-cache',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(collection),
+      types: [
+        types.PATCHCOLLECTION_REQUEST,
+        {
+          type: types.PATCHCOLLECTION_SUCCESS,
+          payload: (action, state, res) => {
+            const contentType = res.headers.get('Content-Type');
+            if (contentType && ~contentType.indexOf('json')) {
+              // Just making sure res.json() does not raise an error
+              return res.json().then((json) => normalize(json, collectionSchema));
+            }
+          }
+        },
+        types.PATCHCOLLECTION_FAILURE
       ]
     }
   };

@@ -48,7 +48,7 @@ class BottlesPage extends React.Component {
 
 BottlesPage.propTypes = {
   actions: PropTypes.object.isRequired,
-  bottles: PropTypes.array.isRequired
+  bottles: PropTypes.object.isRequired
 };
 
 // A container component connects (specific state and actions) to Redux using the code below. Learn more at
