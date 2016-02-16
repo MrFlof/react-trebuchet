@@ -11,6 +11,7 @@ class CollectionsPage extends React.Component {
     this.handleLoadCollections = this.handleLoadCollections.bind(this);
     this.handleEditCollection = this.handleEditCollection.bind(this);
     this.handleAddCollection = this.handleAddCollection.bind(this);
+    this.handleDeleteCollection = this.handleDeleteCollection.bind(this);
   }
 
   render() {
@@ -22,6 +23,7 @@ class CollectionsPage extends React.Component {
         <input type="button" value="fetchCollections alles" onClick={this.handleLoadCollections} />
         <input type="button" value="patch test" onClick={this.handleEditCollection} />
         <input type="button" value="create test" onClick={this.handleAddCollection} />
+        <input type="button" value="delete test" onClick={this.handleDeleteCollection} />
         <pre>{JSON.stringify(collections,2)}</pre>{/*<CollectionsList bottles={collections} actions={actions}/>*/}
       </div>
     );
@@ -39,7 +41,12 @@ class CollectionsPage extends React.Component {
   handleAddCollection(e) {
     //e.preventDefault();
     const name = "New-" + Number(Math.floor(Math.random()*65536)).toString(16).toUpperCase();
-    this.props.actions.createCollection({name: name, barrytest: "123created"});
+    this.props.actions.createCollection({id:7, name: name, barrytest: "123created"});
+  }
+  handleDeleteCollection(e) {
+    //e.preventDefault();
+    const id = 7;
+    this.props.actions.deleteCollection(id);
   }
 }
 

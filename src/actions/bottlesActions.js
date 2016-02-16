@@ -152,3 +152,17 @@ export function createCollection(collection) {
     }
   };
 }
+
+export function deleteCollection(collectionid) {
+  return {
+    [CALL_API]: {
+      endpoint: API_ROOT + '/collections/'+collectionid+'/',
+      method: 'DELETE',
+      types: [
+        types.DELETECOLLECTION_REQUEST,
+        types.DELETECOLLECTION_SUCCESS, // yes, we leave it cached in (normalizr's) entities, for no good reason except we dont have to dispose of it.
+        types.DELETECOLLECTION_FAILURE
+      ]
+    }
+  };
+}
