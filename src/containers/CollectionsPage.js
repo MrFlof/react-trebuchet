@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import * as BottlesActions from '../actions/bottlesActions';
+import * as BottledApiActions from '../actions/bottledApiActions';
 
 
 class CollectionsPage extends React.Component {
@@ -68,7 +68,7 @@ function mapStateToProps(state) {
 // Which action creators does it want to receive by props?
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(BottlesActions, dispatch)
+    actions: bindActionCreators(BottledApiActions, dispatch)
   };
 }
 
