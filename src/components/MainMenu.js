@@ -10,6 +10,7 @@ class MainMenu extends React.Component {
         <li><Link to="/fuelsavings">Fuel Savings</Link></li>
         <li><Link to="/simplecounter">Simple Counter</Link></li>
         <li><Link to="/collections">Collections</Link></li>
+        <li><Link to="/collection">Collection</Link></li>
         <li><Link to="/bottles">Bottles</Link></li>
         <li><Link to="/foo">Foo</Link></li>
         <li><Link to="/bar">Bar</Link></li>
