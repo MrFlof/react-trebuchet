@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import * as BottlesActions from '../actions/bottlesActions';
+import * as bottledApiActions from '../actions/bottledApiActions';
 import BottlesList from '../components/BottlesList';
 
 
@@ -48,7 +48,7 @@ class BottlesPage extends React.Component {
 
 BottlesPage.propTypes = {
   actions: PropTypes.object.isRequired,
-  bottles: PropTypes.object.isRequired
+  bottles: PropTypes.array.isRequired
 };
 
 // A container component connects (specific state and actions) to Redux using the code below. Learn more at
@@ -64,7 +64,7 @@ function mapStateToProps(state) {
 // Which action creators does it want to receive by props?
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(BottlesActions, dispatch)
+    actions: bindActionCreators(bottledApiActions, dispatch)
   };
 }
 

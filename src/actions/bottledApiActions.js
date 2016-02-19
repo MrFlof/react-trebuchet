@@ -4,7 +4,7 @@ import { Schema, arrayOf, normalize } from 'normalizr';
 import * as types from '../constants/ActionTypes';
 
 
-const API_ROOT = 'http://10.13.0.136:3030'; // Change this
+const API_ROOT = 'http://10.13.0.121:3030'; // Change this
 
 // Normalizr schema setup:
 const collectionSchema = new Schema('collections');
@@ -32,7 +32,7 @@ export function fetchCollection(collectionId) {
             const contentType = res.headers.get('Content-Type');
             if (contentType && ~contentType.indexOf('json')) {
               // Just making sure res.json() does not raise an error
-              return res.json().then((json) => normalize(json, { bottles: arrayOf(bottleSchema) }));
+              return res.json().then((json) => normalize(json, collectionSchema));
             }
           }
         },
@@ -45,7 +45,7 @@ export function fetchCollection(collectionId) {
 export function fetchCollections() {
   return {
     [CALL_API]: {
-      endpoint: API_ROOT + '/collections/',
+      endpoint: API_ROOT + '/collections/?_embed=bottles',
       method: 'GET',
       types: [
         types.FETCHCOLLECTIONS_REQUEST,
