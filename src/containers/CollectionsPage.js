@@ -16,6 +16,14 @@ class CollectionsPage extends React.Component {
 
   render() {
     const { collections, actions } = this.props;
+
+    // TODO base this list of collections on an array of ids, and not show all that are in entities.
+    const itemsJsx = [];
+    Object.keys(collections).forEach(function(key) {
+      const collection = collections[key];
+      itemsJsx.push(<li key={collection.id}>#{collection.id}: {collection.name}</li>);
+    });
+
     return (
       <div>
         <h1>The Collections Page</h1>
@@ -24,6 +32,7 @@ class CollectionsPage extends React.Component {
         <input type="button" value="patch test" onClick={this.handleEditCollection} />
         <input type="button" value="create test" onClick={this.handleAddCollection} />
         <input type="button" value="delete test" onClick={this.handleDeleteCollection} />
+        <ul>{itemsJsx}</ul>
         <pre>{JSON.stringify(collections,2)}</pre>{/*<CollectionsList bottles={collections} actions={actions}/>*/}
       </div>
     );
