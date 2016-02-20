@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 
 import * as BottledApiActions from '../actions/bottledApiActions';
 
@@ -21,7 +22,7 @@ class CollectionsPage extends React.Component {
     const itemsJsx = [];
     Object.keys(collections).forEach(function(key) {
       const collection = collections[key];
-      itemsJsx.push(<li key={collection.id}>#{collection.id}: {collection.name}</li>);
+      itemsJsx.push(<li key={collection.id}><Link to={`/collections/${collection.id}/`}>#{collection.id}: {collection.name}</Link></li>);
     });
 
     return (

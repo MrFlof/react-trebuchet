@@ -14,10 +14,10 @@ class CollectionPage extends React.Component {
   }
 
   render() {
-    const { bottles, actions } = this.props;
+    const { collection, bottles, actions } = this.props;
     return (
       <div>
-        <h1>The Collection Page</h1>
+        <h1>The Collection Page for #{collection.id}: {collection.name}</h1>
         <p>Work with data via Bottles API</p>
         <input type="button" value="Test fetchCollection 1" onClick={this.handleLoadCollection1} />
         <input type="button" value="Test fetchCollection 2" onClick={this.handleLoadCollection2} />
@@ -40,18 +40,19 @@ class CollectionPage extends React.Component {
 
 CollectionPage.propTypes = {
   actions: PropTypes.object.isRequired,
-  bottles: PropTypes.array.isRequired
+  collection: PropTypes.object.isRequired,
+  bottles: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
 // A container component connects (specific state and actions) to Redux using the code below. Learn more at
 // https://github.com/rackt/react-redux/blob/4fca3cbc736b7462de65f589d3b0fdab0cb7a495/docs/quick-start.md
 
 // Which part of the Redux global state does our component want to receive as props?
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
   return {
-    // wip..
-    // hardwired to collection 1, and expects its loaded already.
-    bottles: state.entities.collections[1].bottles.map(id => state.entities.bottles[id])
+    id: ownProps.params.id,
+    collection: state.entities.collections[ownProps.params.id],
+    bottles: state.entities.collections[ownProps.params.id].bottles.map(id => state.entities.bottles[id])
   };
 }
 
