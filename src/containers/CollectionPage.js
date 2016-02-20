@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import * as Actions from '../actions/';
 
 
-class BottlesPage extends React.Component {
+class CollectionPage extends React.Component {
   constructor(props) {
     super(props);
     this.handleLoadCollection1 = this.handleLoadCollection1.bind(this);
@@ -38,7 +38,7 @@ class BottlesPage extends React.Component {
   }
 }
 
-BottlesPage.propTypes = {
+CollectionPage.propTypes = {
   actions: PropTypes.object.isRequired,
   bottles: PropTypes.array.isRequired
 };
@@ -47,10 +47,11 @@ BottlesPage.propTypes = {
 // https://github.com/rackt/react-redux/blob/4fca3cbc736b7462de65f589d3b0fdab0cb7a495/docs/quick-start.md
 
 // Which part of the Redux global state does our component want to receive as props?
-function mapStateToProps(stateownProps) {
+function mapStateToProps(state) {
   return {
     // wip..
-    bottles: ownProps.collection.children.map(id => state.bottles[id])
+    // hardwired to collection 1, and expects its loaded already.
+    bottles: state.entities.collections[1].bottles.map(id => state.entities.bottles[id])
   };
 }
 
@@ -64,5 +65,5 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(BottlesPage);
+)(CollectionPage);
 
