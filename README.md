@@ -4,7 +4,7 @@ An extended version of react-slingshot (see below) that adds:
 
   - [x] Pages and router (using redux-simple-router which uses react-router)
   - [x] Debug app state (using redux-devtools)
-  - [ ] Example CRUD on [a REST API](https://github.com/barrystaes/jsonserver-bottledapi) (using ???)
+  - [ ] Example CRUD on [a REST API](https://github.com/barrystaes/jsonserver-bottledapi) using `redux-api-middleware`.
   - [ ] Example JWT for authentication and authorization (using ???)
 
 Which makes it opinionated. This is a base for my future react SPA projects.
