@@ -9,7 +9,7 @@ import { createHistory } from 'history';
 import { syncHistory } from 'react-router-redux';
 import { createStore } from 'redux';
 
-import { App, FuelSavingsPage, SimpleCounterPage, BottlesPage, FooPage, BarPage, NotFoundPage } from './containers';
+import * as Containers from './containers';
 
 
 const history = createHistory();
@@ -19,13 +19,13 @@ const store = configureStore(undefined, storemiddlewareHistory);
 render(
   <Provider store={store}>
     <Router history={history}>
-      <Route path="/" component={App}>
-        <Route path="fuelsavings" component={FuelSavingsPage}/>
-        <Route path="simplecounter" component={SimpleCounterPage}/>
-        <Route path="bottles" component={BottlesPage}/>
-        <Route path="foo" component={FooPage}/>
-        <Route path="bar" component={BarPage}/>
-        <Route path="*" component={NotFoundPage}/>
+      <Route path="/" component={Containers.App}>
+        <Route path="fuelsavings" component={Containers.FuelSavingsPage}/>
+        <Route path="simplecounter" component={Containers.SimpleCounterPage}/>
+        <Route path="bottles" component={Containers.BottlesPage}/>
+        <Route path="foo" component={Containers.FooPage}/>
+        <Route path="bar" component={Containers.BarPage}/>
+        <Route path="*" component={Containers.NotFoundPage}/>
       </Route>
     </Router>
   </Provider>, document.getElementById('app')

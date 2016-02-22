@@ -26,7 +26,7 @@ SimpleCounterPage.propTypes = {
   simpleCounterDecrease: PropTypes.func.isRequired
 };
 
-module.exports = connect(
+export default connect(
   state => ({ simpleCounterAppState: state.simpleCounterAppState }),
   { simpleCounterIncrease, simpleCounterDecrease }
 )(SimpleCounterPage);
