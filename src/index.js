@@ -8,7 +8,7 @@ import { Router, Route, browserHistory } from 'react-router';
 import { syncHistory } from 'react-router-redux';
 import { createStore } from 'redux';
 
-import * as Containers from './containers';
+import Containers from './containers';
 
 
 const storemiddlewareHistory = syncHistory(browserHistory);
