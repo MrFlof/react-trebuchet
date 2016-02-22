@@ -4,7 +4,7 @@ import { Schema, arrayOf, normalize } from 'normalizr';
 import * as types from '../constants/ActionTypes';
 
 
-const API_ROOT = 'http://192.168.2.192:3030'; // Change this
+const API_ROOT = 'http://localhost:3030'; // Change this
 
 // Normalizr schema setup:
 const collectionSchema = new Schema('collections');
