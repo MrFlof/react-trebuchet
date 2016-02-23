@@ -4,7 +4,7 @@ import objectAssign from 'object-assign';
 
 
 const collectionViewInitialState = {
-  collectionid: undefined
+  id: null
 };
 
 function collectionView(state = collectionViewInitialState, action) {
